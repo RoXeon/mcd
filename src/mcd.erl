@@ -751,6 +751,7 @@ data_receiver_accept_response(rtVer, _, Socket) ->
 	{ok, Response} = gen_tcp:recv(Socket, 0),
 	case string:tokens(binary_to_list(Response), " \r\n") of
 		["VERSION", Value | _] -> {ok, Value};
+                ["VERSION" | _] -> {ok, "1.3"};
 		_ -> data_receiver_error_reason(Response)
 	end;
 data_receiver_accept_response(rtGet, ExpFlags, Socket) ->
